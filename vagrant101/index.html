@@ -47,7 +47,7 @@
 
             <p>
                 <small>Follow me @ github:
-                    <a href="https://github.com/ryanfox1985">
+                    <a href="https://github.com/ryanfox1985" target="_blank">
                         Guillermo Guerrero | guillermo{at}guerreroibarra{dot}com
                     </a>
                 </small>
@@ -157,24 +157,91 @@
 
         <section>
             <section>
-                <h2>Example vagrant configuration</h2>
+                <h2>Example Vagrantfile</h2>
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+Vagrant.configure (2) do |config|
+    config.vm.box = 'ubuntu/trusty64'
+    config.ssh.forward agent = true
+    config.vm.network 'forwarded port', :guest => 3000, :host => 9000
+    config.vm.network 'forwarded port', :guest => 3306, :host => 9306
+    config.vm.network 'private network', :ip => '10.10.10.120'
+
+    config.vm.provider 'virtualbox' do |vb|
+        vb.memory = '1024'
+        vb.gui = false
+    end
+end
+                    </code>
+                </pre>
             </section>
             <section>
                 <h2>Vagrant boxes</h2>
+
+                <p>
+                    <a href="https://atlas.hashicorp.com/boxes/search">Atlas hashicorp</a>
+                    <a href="https://atlas.hashicorp.com/boxes/search">
+                        <img height="520px" src="img/atlas_hashicorp.png" />
+                    </a>
+                </p>
+
             </section>
         </section>
 
         <section>
             <section>
                 <h2>Shell provisioning</h2>
+
+                <h3>Inline:</h3>
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+config.vm.provision ”shell”, inline: <<−SHELL sudo apt−get update
+    sudo apt−get install −y apache2
+SHELL
+                    </code>
+                </pre>
+
+                <h3>File:</h3>
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+# Setup the containers when the VM is first created
+app.vm.provision 'shell', path: 'vagrant/setup.sh'
+
+# Make sure the correct containers are running
+# every time we start the VM.
+app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
+                    </code>
+                </pre>
             </section>
 
             <section>
                 <h2>Chef provisioning</h2>
+
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+config.vm.provision :chef_solo do |chef|
+    chef.add recipe 'apt'
+    chef.add recipe 'build−essential'
+    chef.add recipe 'git'
+    chef.add recipe 'nodejs'
+    chef.add recipe 'rvm::system'
+    chef.add recipe 'rvm::vagrant'
+    chef.add recipe 'app::packages'
+    chef.add recipe 'app::mysql'
+    chef.add recipe 'app::gemset'
+    chef.add recipe 'app::environment'
+    chef.add recipe 'app::post−install'
+end
+                    </code>
+                </pre>
+
+                <i><b>Note: </b>Recipe order is important.</i>
             </section>
 
             <section>
                 <h2>Chef market</h2>
+
+                <a href="https://supermarket.chef.io" target="_blank">Supermarket[https://supermarket.chef.io]</a>
             </section>
         </section>
 
@@ -192,17 +259,19 @@
         <section>
             <h2>For noobs</h2>
 
-            PuPHPet → https://puphpet.com
-            Getprotobox → http://getprotobox.com
-            Phansible → http://phansible.com
-            Rove → http://rove.io
+            <ul>
+                <li><a href="https://puphpet.com" target="_blank">PuPHPet</a></li>
+                <li><a href="http://getprotobox.com" target="_blank">Getprotobox</a></li>
+                <li><a href="http://phansible.com" target="_blank">Phansible</a></li>
+                <li><a href="http://rove.io" target="_blank">Rove</a></li>
+            </ul>
         </section>
 
         <section>
             <h2>Vagrant with docker</h2>
 
-            <img src="img/docker-vagrant.png" />
-
+            <img src="img/docker-vagrant.png"/>
+            
             Multimedia services
         </section>
 
