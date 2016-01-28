@@ -242,19 +242,71 @@ end
                 <h2>Chef market</h2>
 
                 <a href="https://supermarket.chef.io" target="_blank">Supermarket[https://supermarket.chef.io]</a>
+                <a href="https://supermarket.chef.io" target="_blank">
+                  <img src="img/supermarket_chef.png" />
+                </a>
             </section>
         </section>
 
         <section>
+          <section>
+              <h2>Berkshelf-Berksfile</h2>
+
+              <pre>
+                  <code class="hljs" data-trim contenteditable>
+source "https://supermarket.getchef.com"
+
+cookbook 'apt'
+cookbook 'git'
+cookbook 'build-essential'
+cookbook 'nodejs'
+cookbook 'mysql'
+cookbook 'rvm'
+cookbook 'openssl'
+cookbook 'app', path: './site-cookbooks/app'
+                  </code>
+              </pre>
+          </section>
+
             <section>
-                <h2>Berkshelf provisioning</h2>
+                <h2>Berkshelf site-cookbooks</h2>
+
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+site-cookbooks/app
+  attributes
+    list_of_attributes.rb
+  recipes
+    list_of_recipies.rb
+  templates
+    defaults_files
+  Berksfile
+  metadata.rb
+                    </code>
+                </pre>
             </section>
 
             <section>
-                <h2>Example</h2>
+                <h2>Berkshelf example recipie</h2>
+
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+mysql_service 'default' do
+  port '3306'
+  version '5.5'
+  initial_root_password 'put_here_a_password'
+  action :create
+end
+                    </code>
+                </pre>
+
+                <p>
+                  <i><a href="https://github.com/ryanfox1985/vagrant-rails-dev" target="_blank">An example</a>
+                    that sets up a Ruby on Rails development box based on Ubuntu with RVM, Ruby 2.1.0, MySQL 5.5.
+                  </i>
+                </p>
             </section>
         </section>
-
 
         <section>
             <h2>For noobs</h2>
@@ -268,17 +320,77 @@ end
         </section>
 
         <section>
-            <h2>Vagrant with docker</h2>
+          <section>
+              <h2>Vagrant with docker</h2>
 
-            <img src="img/docker-vagrant.png"/>
-            
-            Multimedia services
+              <img src="img/docker-vagrant.png" />
+
+              <a href="https://github.com/ryanfox1985/multimedia-services" target="_blank">Multimedia services box</a>
+          </section>
+
+          <section>
+            <h2>Vagrantfile</h2>
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+Vagrant.configure(2) do |config|
+  ...
+
+  # Ubuntu
+  config.vm.box = 'ubuntu/trusty64'
+
+  # Install latest docker
+  config.vm.provision 'docker'
+
+  # Setup the containers when the VM is first created
+  config.vm.provision 'shell', path: 'vagrant/setup.sh'
+
+  # Make sure the correct containers are running
+  # every time we start the VM.
+  config.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
+end
+                </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>Setup.sh</h2>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+# Stop and remove any existing containers
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+# Run and link the containers
+docker run -d -v /vagrant/ddclient/etc:/etc/ddclient --name dynamicdns \
+  ryanfox1985/docker-dynamicdns
+docker run -d -p 8888:8888 -v /vagrant/ddclient/etc:/etc/ddclient \
+  --name sync bittorrent/sync
+...
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h2>Start.sh</h2>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+# Commands required to ensure correct docker containers are started when the vm is rebooted.
+
+docker start dynamicdns
+docker start sync
+docker start sickrage
+docker start couchpotato
+docker start deluge
+              </code>
+            </pre>
+          </section>
         </section>
 
         <section>
             <h2>Questions?</h2>
 
-            <!--<img src="img/final_slide.jpg" />-->
+            <img src="img/final_slide.jpg" />
         </section>
 
     </div>
