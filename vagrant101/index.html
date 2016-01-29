@@ -105,16 +105,17 @@
                 <h2>Provision</h2>
 
                 <ul>
-                    <li>Shell</li>
-                    <li>Puppet</li>
-                    <li>
-                        Chef
-                        <ul>
-                            <li>Chef zero</li>
-                            <li>Berkshelf</li>
-                            <li>Knife</li>
-                        </ul>
-                    </li>
+                  <li>Shell</li>
+                  <li>Puppet</li>
+                  <li>Ansible</li>
+                  <li>
+                    Chef
+                    <ul>
+                      <li>Chef zero</li>
+                      <li><b>Berkshelf</b></li>
+                      <li>Knife</li>
+                    </ul>
+                  </li>
                 </ul>
             </section>
 
@@ -196,8 +197,9 @@ end
                 <h3>Inline:</h3>
                 <pre>
                     <code class="hljs" data-trim contenteditable>
-config.vm.provision ”shell”, inline: <<−SHELL sudo apt−get update
-    sudo apt−get install −y apache2
+config.vm.provision ”shell”, inline: <<−SHELL
+  sudo apt−get update
+  sudo apt−get install −y apache2
 SHELL
                     </code>
                 </pre>
