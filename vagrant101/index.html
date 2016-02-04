@@ -164,10 +164,10 @@
                     <code class="hljs" data-trim contenteditable>
 Vagrant.configure (2) do |config|
     config.vm.box = 'ubuntu/trusty64'
-    config.ssh.forward agent = true
-    config.vm.network 'forwarded port', :guest => 3000, :host => 9000
-    config.vm.network 'forwarded port', :guest => 3306, :host => 9306
-    config.vm.network 'private network', :ip => '10.10.10.120'
+    config.ssh.forward_agent = true
+    config.vm.network 'forwarded_port', :guest => 3000, :host => 9000
+    config.vm.network 'forwarded_port', :guest => 3306, :host => 9306
+    config.vm.network 'private_network', :ip => '10.10.10.120'
 
     config.vm.provider 'virtualbox' do |vb|
         vb.memory = '1024'
