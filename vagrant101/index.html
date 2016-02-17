@@ -69,7 +69,6 @@
                     <ul>
                         <li>Databases</li>
                         <li>Programming languages</li>
-                        <li>Development tools</li>
                     </ul>
                 <li>Isolation</li>
                 <li>Easy to use</li>
@@ -105,7 +104,13 @@
             </section>
 
             <section>
-                <h2>Provision</h2>
+                <h2>Workflow</h2>
+                <img src="img/vagrant_workflow_landscape.jpg" />
+
+            </section>
+
+            <section>
+                <h2>Provisioners</h2>
 
                 <ul>
                   <li><b>Shell</b></li>
@@ -119,17 +124,6 @@
                       <li>Knife</li>
                     </ul>
                   </li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Installation</h2>
-
-                <ul>
-                    <li><a href="https://www.virtualbox.org" target="_blank">Virtual box</a></li>
-                    <li><a href="https://www.vagrantup.com" target="_blank">Vagrant</a></li>
-                    <li><a href="https://downloads.chef.io/chef-dk" target="_blank">Chefdk</a></li>
-                    <li><a href="http://berkshelf.com" target="_blank">Berkshelf</a></li>
                 </ul>
             </section>
 
@@ -153,14 +147,24 @@
                     </li>
                     <li>
                         <a href="https://github.com/smdahlen/vagrant-digitalocean"
-                           target="_blank">vagrant-digitalocean</a> deploys on your intance at DigitalOcean.
+                           target="_blank">vagrant-digitalocean</a> deploys on your instance at DigitalOcean.
                     </li>
                 </ul>
-
             </section>
         </section>
 
         <section>
+            <section>
+                <h2>Installation</h2>
+
+                <ul>
+                    <li><a href="https://www.virtualbox.org" target="_blank">Virtual box</a></li>
+                    <li><a href="https://www.vagrantup.com" target="_blank">Vagrant</a></li>
+                    <li><a href="https://downloads.chef.io/chef-dk" target="_blank">Chefdk</a></li>
+                    <li><a href="http://berkshelf.com" target="_blank">Berkshelf</a></li>
+                </ul>
+            </section>
+
             <section>
                 <h2>Example Vagrantfile</h2>
                 <pre>
@@ -168,9 +172,7 @@
 Vagrant.configure (2) do |config|
     config.vm.box = 'ubuntu/trusty64'
     config.ssh.forward_agent = true
-    config.vm.network 'forwarded_port', :guest => 3000, :host => 9000
-    config.vm.network 'forwarded_port', :guest => 3306, :host => 9306
-    config.vm.network 'private_network', :ip => '10.10.10.120'
+    config.vm.network 'forwarded_port', :guest => 80, :host => 8000
 
     config.vm.provider 'virtualbox' do |vb|
         vb.memory = '1024'
@@ -210,53 +212,35 @@ SHELL
                 <h3>File:</h3>
                 <pre>
                     <code class="hljs" data-trim contenteditable>
-# Setup the containers when the VM is first created
+# Setup when the VM is first created
 app.vm.provision 'shell', path: 'vagrant/setup.sh'
 
-# Make sure the correct containers are running
-# every time we start the VM.
+# This script is running every time we start the VM.
 app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
                     </code>
                 </pre>
             </section>
 
-            <section>
-                <h2>Chef provisioning</h2>
-
-                <pre>
-                    <code class="hljs" data-trim contenteditable>
-config.vm.provision :chef_solo do |chef|
-    chef.add recipe 'apt'
-    chef.add recipe 'build−essential'
-    chef.add recipe 'git'
-    chef.add recipe 'nodejs'
-    chef.add recipe 'rvm::system'
-    chef.add recipe 'rvm::vagrant'
-    chef.add recipe 'app::packages'
-    chef.add recipe 'app::mysql'
-    chef.add recipe 'app::gemset'
-    chef.add recipe 'app::environment'
-    chef.add recipe 'app::post−install'
-end
-                    </code>
-                </pre>
-
-                <i><b>Note: </b>Recipe order is important.</i>
-            </section>
-
-            <section>
-                <h2>Chef market</h2>
-
-                <a href="https://supermarket.chef.io" target="_blank">Supermarket[https://supermarket.chef.io]</a>
-                <a href="https://supermarket.chef.io" target="_blank">
-                  <img src="img/supermarket_chef.png" />
-                </a>
-            </section>
-        </section>
-
-        <section>
           <section>
-              <h2>Berkshelf-Berksfile</h2>
+            <h2>Provisioning</h2>
+
+            <ul>
+              <li>Chef</li>
+              <li>Berkself</li>
+            </ul>
+          </section>
+
+          <section>
+              <h2>Chef market</h2>
+
+              <a href="https://supermarket.chef.io" target="_blank">Supermarket[https://supermarket.chef.io]</a>
+              <a href="https://supermarket.chef.io" target="_blank">
+                <img src="img/supermarket_chef.png" />
+              </a>
+          </section>
+
+          <section>
+              <h2>Berkshelf: Berksfile</h2>
 
               <pre>
                   <code class="hljs" data-trim contenteditable>
@@ -274,8 +258,26 @@ cookbook 'app', path: './site-cookbooks/app'
               </pre>
           </section>
 
+          <section>
+              <h2>Chef: Vagrantfile</h2>
+
+              <pre>
+                  <code class="hljs" data-trim contenteditable>
+config.vm.provision :chef_solo do |chef|
+  chef.add recipe 'apt'
+  chef.add recipe 'build−essential'
+  chef.add recipe 'git'
+  chef.add recipe 'nodejs'
+end
+                  </code>
+              </pre>
+
+              <i><b>Note: </b>Recipe order is important.</i>
+          </section>
+
+
             <section>
-                <h2>Berkshelf site-cookbooks</h2>
+                <h2>Berkshelf: site-cookbooks</h2>
 
                 <pre>
                     <code class="hljs" data-trim contenteditable>
@@ -293,7 +295,7 @@ site-cookbooks/app
             </section>
 
             <section>
-                <h2>Berkshelf example recipie</h2>
+                <h2>Berkshelf: example recipie</h2>
 
                 <pre>
                     <code class="hljs" data-trim contenteditable>
@@ -305,11 +307,10 @@ mysql_service 'default' do
 end
                     </code>
                 </pre>
-
             </section>
 
             <section>
-                <h2>An Example</h2>
+                <h2>An example</h2>
                 <p>
                   <i><a href="https://github.com/ryanfox1985/vagrant-rails-dev" target="_blank">[Link to github]</a>
                     An example that sets up a Ruby on Rails development box based on Ubuntu with RVM, Ruby 2.1.0, MySQL 5.5.
@@ -331,7 +332,7 @@ end
 
         <section>
 
-          <img src="img/recepies_unstable.jpg" />
+          <img src="img/recepies_unstable.jpg" width="80%" />
 
           <p>
             <i>Coobooks are very unstable.</i>
@@ -415,6 +416,12 @@ docker start deluge
               </code>
             </pre>
           </section>
+        </section>
+
+        <section>
+          <h2>Google trends: Vagrant</h2>
+          <img src="img/google_trends.png" width="100%" />
+
         </section>
 
         <section>
