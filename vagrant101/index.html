@@ -263,11 +263,13 @@ cookbook 'app', path: './site-cookbooks/app'
 
               <pre>
                   <code class="hljs" data-trim contenteditable>
+...
 config.vm.provision :chef_solo do |chef|
   chef.add recipe 'apt'
   chef.add recipe 'build−essential'
   chef.add recipe 'git'
   chef.add recipe 'nodejs'
+  chef.add recipe 'app::mysql'
 end
                   </code>
               </pre>
