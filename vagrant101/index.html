@@ -240,6 +240,23 @@ app.vm.provision 'shell', run: 'always', path: 'vagrant/start.sh'
           </section>
 
           <section>
+              <h2>Berkshelf: Vagrantfile</h2>
+
+              <pre>
+                  <code class="hljs" data-trim contenteditable>
+Vagrant.configure(2) do |config|
+  ...
+  # Enable Berkshelf support
+  config.berkshelf.enabled = true
+  config.berkshelf.berksfile_path = './Berksfile'
+  ...
+end
+                </code>
+              </pre>
+
+          </section>
+
+          <section>
               <h2>Berkshelf: Berksfile</h2>
 
               <pre>
@@ -334,10 +351,14 @@ end
 
         <section>
 
-          <img src="img/recepies_unstable.jpg" width="80%" />
+          <img src="img/recepies_unstable.jpg" width="75%" />
 
           <p>
-            <i>Coobooks are very unstable.</i>
+            <i>
+              Coobooks are very unstable.<br />
+              You need a good computer with Ram.<br />
+            </i>
+
           </p>
         </section>
 
