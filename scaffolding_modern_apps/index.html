@@ -46,7 +46,6 @@
 
             <img src="img/intro.png"/>
 
-            TODO imagen intro
             <p>
                 guillermo{at}guerreroibarra{dot}com
             </p>
@@ -74,22 +73,16 @@
 
         <section>
             <section>
+                <h2>Architecture</h2>
 
-                <h2>Components</h2>
-
-                Rails
-                Angular
-                Docker
-                Android
-
-                TODO IMAGEN TODO
+                <img src="img/architecture.png" width="50%" />
             </section>
 
             <section>
                 <h2>Rupibox</h2>
 
                 <p>
-                    Components: [Around 70-80€]
+                    Components: [Price around 70-80€]
                 </p>
                 <ul>
                     <li><a href="https://www.raspberrypi.org">Raspberry</a></li>
@@ -129,7 +122,7 @@
 
         <section>
           <h2>Operating system</h2>
-          link pyrats TODO LINK URL
+          <a href="http://blog.hypriot.com/getting-started-with-docker-on-your-arm-device">Hypriot Rom</a>
           <br />
           <img src="img/raspberry_docker.png" width="65%" />
         </section>
@@ -138,8 +131,6 @@
             <section>
                 <h2>Server: Ruby on Rails</h2>
 
-                <a href="https://github.com/ryanfox1985/rupibox">Github repo</a>
-                <br />
                 <img src="img/Ruby_on_Rails.png" width="40%" style="float:left" />
 
                 <div style="float: right; padding-top: 150px; width: 500px;">
@@ -159,12 +150,34 @@ $ rails new rupibox
 $ rails g scaffold Pin name:string pin_pi:integer value:boolean
                     </code>
                 </pre>
+
+                <br />
+
+                <a href="https://github.com/ryanfox1985/rupibox">Github repo</a>
             </section>
 
             <section>
-                <h2>Server: Ruby on Rails</h2>
+              <h2>Server: Routes Map</h2>
 
-                <img src="img/not_bad.jpg" width="50%" />
+              <pre>
+                  <code class="hljs" data-trim contenteditable>
+Prefix Verb         URI Pattern            Controller#Action
+pins      GET     /pins(.:format)          pins#index
+          POST    /pins(.:format)          pins#create
+new_pin   GET     /pins/new(.:format)      pins#new
+edit_pin  GET     /pins/:id/edit(.:format) pins#edit
+ pin      GET     /pins/:id(.:format)      pins#show
+          PATCH   /pins/:id(.:format)      pins#update
+          PUT     /pins/:id(.:format)      pins#update
+          DELETE  /pins/:id(.:format)      pins#destroy
+                   </code>
+               </pre>
+            </section>
+
+            <section>
+                <h2>Server: Done!</h2>
+
+                <img src="img/really_bro.jpg" width="70%" />
             </section>
         </section>
 
@@ -239,12 +252,15 @@ $ bower install bootstrap-switch --save
 $ bower install angular-xeditable --save
                     </code>
                 </pre>
+
+                <br />
+                <a href="https://github.com/ryanfox1985/rupibox/tree/master/angular">Github repo</a>
             </section>
 
             <section>
-                <h2>Frontend: AngularJS</h2>
+                <h2>Frontend: Done!</h2>
 
-                <img src="img/really_bro.jpg" />
+                <img src="img/not_bad.jpg" width="50%" />
             </section>
         </section>
 
@@ -254,7 +270,7 @@ $ bower install angular-xeditable --save
 
                 <ul>
                     <li><a href="https://github.com/stephanenicolas/robospice">Robospice</a></li>
-                    <li>Voice recognition ~> Android 4 TODO MIRAR!</li>
+                    <li>Voice recognition ~> Android 4</li>
                     <li><a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein</a></li>
                 </ul>
 
@@ -272,7 +288,7 @@ $ bower install angular-xeditable --save
             <section>
                 <h2>Android client: Video</h2>
 
-                <video width="33%" controls>
+                <video width="90%" controls>
                   <source data-src="img/android_video.mp4" type="video/mp4" />
                 </video>
             </section>
