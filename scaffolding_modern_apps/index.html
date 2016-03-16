@@ -69,21 +69,16 @@
                 <li>Easy</li>
                 <li>Extensible</li>
                 <li>Quality</li>
+                <li>Prototyping</li>
             </ul>
         </section>
 
         <section>
             <section>
-                <h2>Architecture</h2>
-
-                <img src="img/architecture.png" width="50%" />
-            </section>
-
-            <section>
                 <h2>Rupibox</h2>
 
                 <p>
-                    Components: [Price around 70-80€]
+                    Components: [Price ~ 80€]
                 </p>
                 <ul>
                     <li><a href="https://www.raspberrypi.org">Raspberry</a></li>
@@ -122,6 +117,24 @@
         </section>
 
         <section>
+          <section>
+              <h2>Design: Architecture</h2>
+
+              <img src="img/architecture.png" width="50%" />
+          </section>
+
+          <section>
+              <h2>Design: Choosing the language, frameworks, databases...</h2>
+
+              <ul>
+                <li>Ruby, Python, Java</li>
+                <li>Sinatra, RoR, Django, Flask, ...</li>
+                <li>PostgreSQL, MySQL, Sqlite</li>
+              </ul>
+          </section>
+        </section>
+
+        <section>
           <h2>Operating system</h2>
           <a href="http://blog.hypriot.com/getting-started-with-docker-on-your-arm-device">Hypriot Rom</a>
           <br />
@@ -148,6 +161,7 @@
                 <pre>
                     <code class="hljs" data-trim contenteditable>
 $ rails new rupibox
+$ cd rupibox
 $ rails g scaffold Pin name:string pin_pi:integer value:boolean
                     </code>
                 </pre>
@@ -192,7 +206,8 @@ edit_pin  GET     /pins/:id/edit(.:format) pins#edit
                   <a href="http://yeoman.io">Yeoman.io</a>
                   <pre>
                       <code class="hljs" data-trim contenteditable>
-                          $ yo angular
+$ mkdir angular; cd angular
+$ yo webapp
                       </code>
                   </pre>
                 </div>
