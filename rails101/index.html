@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Ruby on rails</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>Backend with Ruby on Rails</h2>
+
+            <img width="20%" src="img/intro.png"/>
+
+            <p>
+                guillermo{at}guerreroibarra{dot}com
+            </p>
+            <p>
+                <small>Follow me on github:
+                    <a href="https://github.com/ryanfox1985" target="_blank">
+                        https://github.com/ryanfox1985
+                    </a>
+                </small>
+            </p>
+            <p>
+                <small>May 25th, 2016</small>
+            </p>
+        </section>
+
+        <section>
+            <h2>What is it?</h2>
+
+            <p>
+              <img width="10%" src="img/rails.png"/>
+            </p>
+            <ul>
+              <li>Initial release: 18 December 2005</li>
+              <li>Stable release: 4.2.6</li>
+              <li>Convention over configuration (CoC)</li>
+              <li>Don't repeat yourself (DRY)</li>
+              <li>Design pattern: MVC</li>
+            </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>MVC</h2>
+
+            <p>
+              <img width="100%" src="img/mvc.jpg"/>
+            </p>
+          </section>
+
+          <section>
+            <h2>RoR Controllers</h2>
+
+            <ul>
+              <li>config/routes.rb</li>
+              <li>app/controllers</li>
+              <li>Application controller (Parent class)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>RoR Models</h2>
+
+            <ul>
+              <li>app/models</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>RoR Views</h2>
+
+            <ul>
+              <li>app/views/layouts</li>
+              <li>app/views</li>
+              <li>Individual folder for each controller</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Rails cli</h2>
+
+                <pre>
+                    <code class="hljs" data-trim contenteditable>
+$ rails --help
+$ rails new blog
+$ cd blog; rails s
+$ cd blog; rails c
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <h2>Rake cli</h2>
+
+                <ul>
+                    <li>rake</li>
+                    <li>rake routes</li>
+                    <li>rake db:create | rake db:drop</li>
+                    <li>rake db:migrate | rake db:rollback</li>
+                    <li>rake db:seed</li>
+                    <li>rake db:schema:load</li>
+                    <li>rake (lib_task)</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <h2>RoR project folders:</h2>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+|____app
+| |____assets
+| |____controllers
+| |____helpers
+| |____mailers
+| |____models
+| |____views
+|____bin
+|____config
+|____db
+|____Gemfile
+|____lib
+|____log
+|____public
+|____test
+|____tmp
+|____vendor
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Dependencies (Gemfile)</h2>
+
+            <p><img src="img/rubygems.png" /></p>
+
+            <p><a href="https://rubygems.org">Rubygems</a> and <a href="http://bundler.io">Bundler</a> cli:</p>
+
+            <ul>
+                <li>bundle install</li>
+                <li>bundle update</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Environments</h2>
+
+            <p>Database configurations, application behaviours, code inline</p>
+
+            <ul>
+                <li>Development</li>
+                <li>Test</li>
+                <li>Production</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Scaffolding</h2>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+$ rails g scaffold post title:string content:text
+$ rails g scaffold comment post:references author:string opinion:text
+                </code>
+            </pre>
+
+            <ul>
+              <li>rake db:migrate</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Seeding</h2>
+
+            <ul>
+                <li><a href="https://github.com/stympy/faker">gem 'faker'</a></li>
+            </ul>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+# db/seeds.rb
+
+10.times do
+  p = Post.create(title: Faker::Hipster.sentence, content:Faker::Hipster.paragraph)
+
+  5.times do
+    Comment.create(post: p, author: Faker::App.author, opinion: Faker::Hipster.sentence)
+  end
+end
+                </code>
+            </pre>
+
+            <ul>
+              <li>bundle install</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>API REST</h2>
+
+            <ul>
+              <li><a href="https://github.com/rails/jbuilder">gem 'jbuilder'</a></li>
+              <li>Add views and render your json</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Testing</h2>
+
+            <ul>
+                <li>mini-test</li>
+                <li>test/*</li>
+                <li>test/fixtures</li>
+                <li>test/test_helper.rb</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Coverage</h2>
+
+            <ul>
+              <li><a href="https://github.com/colszowka/simplecov">gem 'simplecov', require: false</a></li>
+            </ul>
+
+            <pre>
+                <code class="hljs" data-trim contenteditable>
+#test/test_helper.
+
+require 'simplecov'
+SimpleCov.start
+                </code>
+            </pre>
+
+            <ul>
+              <li>bundle install</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Questions?</h2>
+
+            <img src="img/final_slide.jpg"/>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
