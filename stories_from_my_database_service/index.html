@@ -63,15 +63,13 @@
 
         <section>
           <section>
-              <h2>Modern apps</h2>
+              <h2>Modern app</h2>
 
-              12-factor link!
-              image!
               <p>
-                <img width="10%" src="img/rails.png"/>
+                <img src="img/12factor.gif" />
               </p>
               <ul>
-                <li>12-factors</li>
+                <li><a href="https://12factor.net" target="_blank">12-factors</a></li>
                 <li>My database as a service</li>
               </ul>
           </section>
@@ -79,27 +77,27 @@
           <section>
             <h2>Common relational database</h2>
 
-            wikipedia links!
             <ul>
-              <li>Postgresql, MySQL, SQL Server...</li>
-              <li>SQL</li>
+              <li>
+                <a href="https://www.postgresql.org" target="_blank">Postgresql</a>,
+                <a href="http://www.mysql.com" target="_blank">MySQL</a>,
+                <a href="https://www.microsoft.com/en-us/sql-server/sql-server-2016" target="_blank">SQL Server</a>, ...
+              </li>
+              <li><a href="https://en.wikipedia.org/wiki/SQL" target="_blank">SQL</a></li>
             </ul>
           </section>
 
           <section>
             <h2>Is posible to scale my database?</h2>
 
-            heroku link!
             <ul>
-              <li>heroku see pricing</li>
-              <li>Postgresxl</li>
-              <li>Galera mysql</li>
-              <li>What happens with others...</li>
+              <li><a href="http://www.postgres-xl.org" target="_blank">Postgresxl</a></li>
+              <li><a href="https://elements.heroku.com/addons/heroku-postgresql" target="_blank">Heroku Postgresql pricing</a></li>
             </ul>
           </section>
 
           <section>
-            meme WTF? / I don't pay this shit.
+            <img width="120%" src="img/price_sweat.gif" />
           </section>
         </section>
 
@@ -107,23 +105,17 @@
           <section>
             <h2>Analyze your application</h2>
 
-            newrelic link!
             <ul>
-              <li>Monitoring tool: Newrelic, heroku dashboard, logs...</li>
-              <li>Reads / Writes</li>
-              <li>Without modify the app</li>
-              <li>Modifying the app</li>
+              <li><a href="https://newrelic.com" target="_blank">Newrelic</a></li>
+              <li>Heroku dashboard</li>
+              <li>Service logs</li>
             </ul>
           </section>
 
           <section>
-            <h2>Queries with more time consumition / logs</h2>
+            <h2>Expensive queries</h2>
 
-            TODO heroku capture
-            TODO Newrelic capture
-            <ul>
-              <li>Heroku capture</li>
-            </ul>
+            <img width="90%" src="img/heroku_postgresql_logs.jpg" />
           </section>
 
           <section>
@@ -140,7 +132,7 @@ select * from cars c where c.color like 'red';
           <section>
             <h2>Query plan</h2>
 
-            wikipedia link!
+            <a href="https://en.wikipedia.org/wiki/Query_plan" target="_blank">Wikipedia: Query plan</a>
             <pre>
               <code class="hljs" data-trim contenteditable>
 explain select * from cars c where c.color like 'red';
@@ -164,7 +156,7 @@ CREATE INDEX index_cars_on_color ON cars USING btree
           </section>
 
           <section>
-            <h2>Query plan impoved</h2>
+            <h2>Query plan improved</h2>
 
             <pre>
               <code class="hljs" data-trim contenteditable>
@@ -179,11 +171,11 @@ explain select * from cars c where c.color like 'red';
 
         <section>
           <section>
-              <h2>Use caches</h2>
+              <h2>Use a cache</h2>
 
               <ul>
-                <li>Memcached</li>
-                <li>Redis</li>
+                <li><a href="https://memcached.org" target="_blank">Memcached</a></li>
+                <li><a href="http://redis.io" target="_blank">Redis</a></li>
               </ul>
           </section>
 
@@ -242,39 +234,56 @@ Rails.cache.delete "all_cars"
           <section>
             <h2>Distribute reads</h2>
 
-            TODO: diagram
-
-            LINKS:
-            Amazon RDS replica nodes
-            Heroku database followers
+            <ul>
+              <li><a href="https://aws.amazon.com/es/rds" target="_blank">Amazon RDS</a>: read replicas</li>
+              <li>Heroku database followers</li>
+            </ul>
           </section>
 
           <section>
-            <h2>Octopus gem</h2>
+            <h2>App using followers</h2>
 
-            Manage replicas nodes.
-            Modifies active record behaviour.
+            <ul>
+              <li><a href="https://github.com/thiagopradi/octopus" target="_blank">Octopus gem</a></li>
+              <li><a href="https://github.com/thiagopradi/octopus/wiki/Replication-with-Rails-on-Heroku" target="_blank">Guide</a></li>
+              <li>Manage replicas nodes.</li>
+              <li>Modifies active record behaviour.</li>
+            </ul>
           </section>
 
           <section>
             <h2>Ruby on Rails: example</h2>
 
-            Yml configuration file.
-            Model add a query
+            <a href="https://gist.github.com/eprothro/5374472" target="_blank">Yml configuration file.</a>
+
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+class StaticThing < ActiveRecord::Base
+  replicated_model
+  ...
+end
+              </code>
+            </pre>
           </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>No sql new service</h2>
-
-            add a services to query the database.
-          </section>
 
           <section>
-            <h2>Elastic search</h2>
+            <h2>Ruby on Rails: logs</h2>
 
-            sample query.
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+Master:
+
+DynamicThing Load (0.2ms)  SELECT "dynamic_things".* FROM "dynamic_things"
+
+Follower(s):
+
+[Shard: orange_follower]
+  StaticThing Load (0.3ms)  SELECT "static_things".* FROM "static_things"
+
+[Shard: pink_follower]
+  StaticThing Load (0.2ms)  SELECT "static_things".* FROM "static_things"
+              </code>
+            </pre>
           </section>
         </section>
 
@@ -282,9 +291,10 @@ Rails.cache.delete "all_cars"
           <section>
             <h2>Sharding: Horizontal partition</h2>
 
-            + maintenance
-            + manage all connections to databases
-            distribute all queries on different nodes
+            <ul>
+              <li>Create different databases</li>
+              <li>Distribute all queries on different nodes</li>
+            <ul>
           </section>
 
           <section>
@@ -298,10 +308,56 @@ select * from cars c;
               </code>
             </pre>
           </section>
+
+          <section>
+            <h2>Problems</h2>
+
+            <ul>
+              <li>Manage all connections to databases</li>
+              <li>Maintenance</li>
+            </ul>
+          </section>
         </section>
 
         <section>
-          <h2>Meme end</h2>
+          <section>
+            <h2>Nosql new service</h2>
+
+            <ul>
+              <li><a href="https://www.elastic.co/products/elasticsearch">Elastic search</a></li>
+              <li><a href="https://lucene.apache.org/solr">Solr</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Elastic search</h2>
+
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+select * from cars c where c.color like 'red';
+              </code>
+            </pre>
+
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+curl -XPOST "http://localhost:9200/cars/_search" -d'
+{
+    "query": {
+        "query_string": {
+            "query": "red",
+            "fields": ["color"]
+        }
+    }
+}'
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Questions?</h2>
+
+          <img width="57%" src="img/final_slide.jpg" />
         </section>
     </div>
 </div>
