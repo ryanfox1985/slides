@@ -44,7 +44,7 @@
         <section>
             <h2>Webservice deployments</h2>
 
-            <img src="img/intro.png" />
+            <img src="img/intro.jpg" width="30%" />
 
             <p>
               guillermo{at}guerreroibarra{dot}com
@@ -57,35 +57,45 @@
                 </small>
             </p>
             <p>
-                <small>February 17th, 2016</small>
+                <small>June 6th, 2017</small>
             </p>
         </section>
 
         <section>
           <section>
-            <h2>Problems</h2>
-
-            - patch server
-            - downtimes
-
-            Meme downtime
-          </section>
-
-          <section>
             <h2>My Application</h2>
 
             <ul>
+              <li>Features</li>
+              <li>Bug fixes</li>
+              <li>Tech debts</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Old deployments</h2>
+
+            <ul>
+              <li>Patch servers</li>
+              <li>Downtimes</li>
+              <li>Without rollbacks</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Organize my deployments</h2>
+
+            <ul>
+              <li>Tagging:
+                <ul>
+                  <li>1,2,3...</li>
+                  <li>latest</li>
+                </ul>
+              </li>
               <li>Independent releases:
                 <ul>
                   <li>Update</li>
                   <li>Rollback</li>
-                </ul>
-              </li>
-
-              <li>Tagging
-                <ul>
-                  <li>1,2,3...</li>
-                  <li>latest</li>
                 </ul>
               </li>
             </ul>
@@ -94,7 +104,14 @@
           <section>
             <h2>My Infrasctructure</h2>
 
-            Load balancer + service
+            <ul>
+              <li>Load balancer</li>
+              <li>My service</li>
+            </ul>
+
+            <br />
+
+            <img src="img/load_balancer.png" width="80%" />
           </section>
         </section>
 
@@ -109,38 +126,152 @@
             </section>
 
             <section>
-              <h2>Example mutable</h2>
+              <h2>Infrastructure mutable</h2>
+
+              <img src="img/mutable.png" />
             </section>
 
             <section>
-              <h2>Example inmutable</h2>
+              <h2>Infrastructure inmutable</h2>
+              <img src="img/inmutable.png" />
             </section>
         </section>
 
         <section>
           <section>
             <h2>Red/Black deployments</h2>
-          </section>
 
-          <section>
-            <h2>Esquema</h2>
-
+            <img src="img/red_black_deployment.jpg" />
           </section>
         </section>
 
         <section>
           <section>
             <h2>Blue/Green deployments</h2>
+            Step 1
+            <br />
+
+            <img src="img/blue1.png" />
+          </section>
+
+          <section>
+            <h2>Blue/Green deployments</h2>
+            Step 2
+            <br />
+
+            <img src="img/blue2.png" />
+          </section>
+
+          <section>
+            <h2>Blue/Green deployments</h2>
+            Step 3
+            <br />
+
+            <img src="img/blue3.png" />
+          </section>
+
+          <section>
+            <h2>Blue/Green deployments</h2>
+            Step 4
+            <br />
+
+            <img src="img/blue4.png" />
+          </section>
+
+          <section>
+            <h2>Blue/Green deployments</h2>
+            Step 5
+            <br />
+
+            <img src="img/blue5.png" />
           </section>
 
           <section>
             <h2>Esquema</h2>
 
+            <ul>
+              <li>
+                We have up and running:<br/>
+                <ul>
+                  <li>Load balancer</li>
+                  <li>service_current</li>
+                </ul>
+              </li>
+              <li>
+                Update process:<br />
+                <ul>
+                  <li>Pull latest image</li>
+                  <li>Run migrations on new image</li>
+                  <li>Start service_new</li>
+                  <li>Wait until ready</li>
+                  <li>Stop service_current</li>
+                  <li>Rename service_new to service_current</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Example</h2>
+            <a href="https://github.com/vincetse/docker-compose-zero-downtime-deployment">
+              https://github.com/vincetse/docker-compose-zero-downtime-deployment
+            </a>
+          </section>
+
+          <section>
+            <h2>Docker compose</h2>
+
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+proxy:
+  image: jwilder/nginx-proxy
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
+
+app:
+  build: service
+  environment:
+    - VIRTUAL_HOST=localhost
+
+service_a:
+  extends:
+    service: app
+
+service_b:
+  extends:
+    service: app
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h2>Script update</h2>
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+docker-compose build --no-cache app service_a service_b
+
+# Shut down Service A first, and restart with new image
+docker-compose stop service_a
+docker-compose up -d --force-recreate service_a
+
+# Wait a little in case the service takes a bit to start
+sleep 5
+
+# Now shut down and restart Service B with new image.
+docker-compose stop service_b
+docker-compose up -d --force-recreate service_b
+
+              </code>
+            </pre>
           </section>
 
           <section>
             <h2>Demo</h2>
           </section>
+        </section>
+
+        <section>
+          <h2>End</h2>
         </section>
     </div>
 
