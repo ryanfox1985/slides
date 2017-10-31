@@ -1,0 +1,15 @@
+Vagrant.configure (2) do |config|
+    config.vm.box = 'ubuntu/trusty64'
+    config.ssh.forward_agent = true
+    config.vm.network 'forwarded_port', guest: 8000, host: 8000
+
+    config.vm.provider 'virtualbox' do |vb|
+        vb.memory = '1024'
+        vb.gui = false
+    end
+
+    config.vm.provision 'shell', path: 'vagrant/setup.sh'
+    config.vm.provision 'shell', run: 'always', inline: <<-SHELL
+      echo "Start grunt with: vagrant ssh -c 'cd /vagrant; grunt serve'"
+    SHELL
+end
