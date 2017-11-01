@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Introduction to ReactNative</title>
+    <title>Introduction to React Native</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -42,30 +42,27 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <section>
-            <h2>Introduction to ReactNative</h2>
+            <h2>Introduction to</h2>
 
-            <!-- <img src="img/intro.jpg" width="30%" /> -->
+            <img src="img/react_native.svg" width="100%" style="border:none;" />
 
             <p>
               guillermo{at}guerreroibarra{dot}com
-            </p>
-            <p>
-                <small>Follow me on github:
-                    <a href="https://github.com/ryanfox1985" target="_blank">
-                      https://github.com/ryanfox1985
-                    </a>
-                </small>
-            </p>
-            <p>
+              <br />
               Alejandro Garcia
             </p>
             <p>
-                <small>Follow me on github:
+                <small>Follow us on github:<br />
+                    <a href="https://github.com/ryanfox1985" target="_blank">
+                      https://github.com/ryanfox1985
+                    </a>
+                    <br />
                     <a href="https://github.com/agrcrobles" target="_blank">
                       https://github.com/agrcrobles
                     </a>
                 </small>
             </p>
+            <br />
             <p>
                 <small>November 2nd, 2017</small>
             </p>
@@ -82,6 +79,7 @@
             <ul>
               <li>Built by Facebook</li>
               <li>Applications run at near full speed</li>
+              <li>80% code sharing between iOS and Android</li>
               <li>Architeture is scalable</li>
               <li>Extensible libraries</li>
               <li>BSD Licensed</li>
@@ -89,14 +87,13 @@
           </section>
 
           <section>
-            <h2>Markets & Platforms</h2>
+            <h2>Markets &amp; Platforms</h2>
 
-            <ul>
-              <li>Apple</li>
-              <li>Android</li>
-            </ul>
+            <p>
+              Apple | Android
+            </p>
 
-            <br />
+            <img src="img/apple-vs-android.jpg" width="50%" />
             <br />
 
             <ul>
@@ -116,73 +113,126 @@
               <li>Hybrids</li>
             </ul>
           </section>
+
+          <section>
+            <h2>React Native is an extension of hybrid applications</h2>
+          </section>
         </section>
+
         <section>
           <section>
-            <h2>ReactNative layers schema</h2>
+            <h2>React Components</h2>
 
+            <img src="img/react_components.png" width="80%" />
+          </section>
+          <section>
+            <h2>React Native layers schema</h2>
+
+            <img src="img/react_layers.jpeg" width="43%" />
           </section>
 
           <section>
-            <h2>ReactNative states schema</h2>
+            <h2>React Native states schema</h2>
 
+            <img src="img/react_states.png" width="70%" />
           </section>
 
           <section>
-            <h2>Why ReactNative?</h2>
+            <h2>Why is React Native cool?</h2>
 
             <ul>
               <li>Leverage existing skill sets to write apps with native feel</li>
               <li>Gets you out of the "responsive HTML5"</li>
               <li>Writing cross-platform with high performance apps using a single business logic codebase.</li>
-              <li>80% code sharing between iOS and Android</li>
               <li>Hot reloading, no time wasted in recompiling</li>
+              <li>Add React Native to an existing app</li>
             </ul>
           </section>
         </section>
-        <section>
-          <h2>Getting started in android</h2>
-          <ul>
-            <li>Linux Window o Mac</li>
-            <li>node.js</li>
-            <li>Install the Android SDK 23, Google API, Configure PATH, etc</li>
-            <li>react native cli</li>
-            <li>More info: https://facebook.github.io/react-native/docs/getting-started.html</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Expo</h2>
-        </section>
-        <section>
-          <img src="img/api.jpg" />
-        </section>
+
         <section>
           <section>
             <h2>React Hello World</h2>
 
             <pre>
               <code class="hljs" data-trim contenteditable>
-aaaa
+var HelloNameComponent = React.createClass({
+  render: function(){
+    return ( <h1>Hello, {this.props.name}!</h1> ); }
+});
+
+ReactDOM.render(<HelloNameComponent name="Rami"> </HelloNameComponent>,
+                document.getElementById('app'));
               </code>
             </pre>
           </section>
 
           <section>
-            <h2>ReactNative Hello world</h2>
+            <h2>React Native Hello world</h2>
             <pre>
               <code class="hljs" data-trim contenteditable>
-bbbb
+class HelloWorldApp extends Component { render() {
+  return ( <Text>Hello world!</Text> ); }
+}
+
+AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
               </code>
             </pre>
           </section>
 
           <section>
-            <h2>Demo</h2>
+            <h2>Styling for components</h2>
+            <pre>
+              <code class="hljs" data-trim contenteditable>
+class LotsOfStyles extends Component {
+   render() {
+     return (
+        <View>
+        <Text style={styles.red}>just red</Text>
+        <Text style={styles.bigblue}>just bigblue</Text>
+        </View>
+      );
+    }
+}
+
+const styles = StyleSheet.create({
+  bigblue: { color: 'blue', fontWeight: 'bold', fontSize: 30, },
+  red: { color: 'red', }
+});
+              </code>
+            </pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Getting started in android</h2>
+            <ul>
+              <li>Linux Window o Mac</li>
+              <li>node.js</li>
+              <li>Install the Android SDK 23, Google API, Configure PATH, etc</li>
+              <li>react native cli</li>
+              <li>More info: <a target="_blank" href="https://facebook.github.io/react-native/docs/getting-started.html">https://facebook.github.io/react-native/docs/getting-started.html</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Expo</h2>
+          </section>
+
+          <section>
+            <img src="img/api.jpg" />
           </section>
         </section>
 
         <section>
           <h2>End</h2>
+
+          <p>
+            We all love Javascript
+          </p>
+
+          <img src="img/wat.jpg" />
         </section>
     </div>
 
