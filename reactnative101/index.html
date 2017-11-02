@@ -47,7 +47,7 @@
             <img src="img/react_native.svg" width="100%" style="border:none;" />
 
             <p>
-              guillermo{at}guerreroibarra{dot}com
+              Guillermo Guerrero
               <br />
               Alejandro Garcia
             </p>
@@ -93,9 +93,7 @@
               <li>BSD Licensed</li>
             </ul>
           </section>
-          <section>
-              <img src="img/whatisreactnative.png" />
-            </section>
+
           <section>
             <h2>Markets &amp; Platforms</h2>
 
@@ -108,9 +106,9 @@
 
             <ul>
               <li>Smartphones</li>
-              <li>Tablets</li>
               <li>Smartwatches</li>
-              <li>Gadgets</li>
+              <li>Tablets</li>
+              <li>Others</li>
             </ul>
           </section>
 
@@ -170,7 +168,8 @@
 var HelloNameComponent = React.createClass({
   render: function(){
     return ( <h1>Hello, {this.props.name}!</h1> ); }
-});
+  }
+);
 
 ReactDOM.render(<HelloNameComponent name="Rami"> </HelloNameComponent>,
                 document.getElementById('app'));
@@ -182,8 +181,10 @@ ReactDOM.render(<HelloNameComponent name="Rami"> </HelloNameComponent>,
             <h2>React Native Hello world</h2>
             <pre>
               <code class="hljs" data-trim contenteditable>
-class HelloWorldApp extends Component { render() {
-  return ( <Text>Hello world!</Text> ); }
+class HelloWorldApp extends Component {
+  render() {
+    return ( <Text>Hello world!</Text> );
+  }
 }
 
 AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
@@ -199,8 +200,8 @@ class LotsOfStyles extends Component {
    render() {
      return (
         <View>
-        <Text style={styles.red}>just red</Text>
-        <Text style={styles.bigblue}>just bigblue</Text>
+          <Text style={styles.red}>just red</Text>
+          <Text style={styles.bigblue}>just bigblue</Text>
         </View>
       );
     }
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
 
         <section>
           <section>
-            <h2>Getting started on android</h2>
+            <h2>Getting started on Android</h2>
             <ul>
               <li>Linux Window o Mac</li>
               <li>node.js</li>
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
             </ul>
           </section>
             <section>
-              <h2>Getting started on osx</h2>
+              <h2>Getting started on OS X</h2>
               <ul>
                 <li>Mac</li>
                 <li>node.js</li>
@@ -309,7 +310,7 @@ const styles = StyleSheet.create({
           <li>SQLite</li>
           <li>Svg</li>
         </ul>
-      </section> 
+      </section>
           <section>
             <h2>Snacks</h2>
           </section>
@@ -320,7 +321,7 @@ const styles = StyleSheet.create({
         </section>
         <section>
             <h2>Microsoft Codepush</h2>
-          </section>        
+          </section>
         <section>
           <h2>Questions?</h2>
         </section>
