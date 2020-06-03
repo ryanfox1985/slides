@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Gitlab</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>Gitlab</h2>
+
+            <img width="20%" src="img/gitlab_logo.png"/>
+
+            <p>
+                guillermo.guerrero{at}fr.fcm.travel{dot}com
+            </p>
+
+            <p>
+                <small>June 5th, 2020</small>
+            </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>What is CI (Continuous Integration)?</h2>
+
+            <p>
+              <img width="50%" src="img/continuous-integration.png"/>
+            </p>
+          </section>
+
+          <section>
+            <h2>What is CD?</h2>
+
+            <p>
+              <img width="100%" src="img/continuous-delivery-versus-continuous-deployment.png"/>
+            </p>
+          </section>
+
+          <section>
+            <h2>Examples:</h2>
+
+            <p>
+              - Continuous delivery:
+              <img width="100%" src="img/continuous_delivery.png"/>
+            </p>
+
+            <p>
+              - Continuous deployment:
+              <img width="100%" src="img/continuous_deployment.png"/>
+            </p>
+          </section>
+
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Hi Gitlab</h2>
+
+            <p>
+              <img width="20%" src="img/gitlab_logo.png"/>
+            </p>
+
+            <p>
+              From:
+            </p>
+
+            <p>
+              <ul>
+                <li>Github</li>
+                <li>Codeship (CI)</li>
+                <li>Dockerhub</li>
+              </p>
+            </p>
+          </section>
+
+          <section>
+            <h2>gitlab-ci.yml</h2>
+
+            <pre style="font-size: 18px;">
+image: "ruby:2.5"
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq sqlite3 libsqlite3-dev nodejs
+  - ruby -v
+  - gem install bundler --no-document
+  - bundle install
+
+rspec:
+  script:
+    - bundle exec rspec
+
+rubocop:
+  script:
+    - bundle exec rubocop
+            </pre>
+
+            <ul>
+              <li><a href="https://gitlab.com/3mundi/hellofcm/-/jobs" target="_blank">https://gitlab.com/3mundi/hellofcm/-/jobs</a></li>
+              <li><a href="https://gitlab.com/3mundi/hellofcm/-/jobs/579150203" target="_blank">https://gitlab.com/3mundi/hellofcm/-/jobs/579150203</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Tags</h2>
+
+            <ul>
+              <li>docker</li>
+              <li>fcm_build</li>
+              <li>fcm_deploy</li>
+              <li>test</li>
+              <li>feature_test</li>
+              <li>...</li>
+            </ul>
+
+            <pre>
+...
+rspec:
+  tags:
+    - docker
+    - ruby
+    - postgres
+  script:
+    - bundle exec rspec
+            </pre>
+            <ul>
+              <li><a href="https://gitlab.com/3mundi/hellofcm/-/jobs" target="_blank">https://gitlab.com/3mundi/hellofcm/-/jobs</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Workflows/pipelines</h2>
+
+            <pre>
+...
+stages:
+ - linter
+ - test
+ - build
+ - deploy
+
+ rspec:
+   stage: test
+   script:
+     - bundle exec rspec
+            </pre>
+
+            <p>
+              <img width="60%" src="img/pipelines_status.png"/>
+            </p>
+
+            <ul>
+              <li><a href="https://gitlab.com/3mundi/hellofcm/pipelines" target="_blank">https://gitlab.com/3mundi/hellofcm/pipelines</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Cache/Artifacts</h2>
+
+            <ul>
+              <li>Cache: job speed up</li>
+              <li>Artifact: results</li>
+            </ul>
+
+            <pre>
+...
+rspec:
+  cache:
+    paths:
+      - vendor/bundle/
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+      - tmp/capybara/
+  script:
+    - bundle exec rspec
+            </pre>
+
+            <a href="https://gitlab.com/3mundi/hellofcm/-/jobs/579150199" target="_blank">https://gitlab.com/3mundi/hellofcm/-/jobs/579150199</a>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Gitlab runners</h2>
+
+            <img width="70%" src="img/runners_page.png" />
+
+            <a href="https://gitlab.com/3mundi/hellofcm/-/settings/ci_cd" target="_blank">https://gitlab.com/3mundi/hellofcm/-/settings/ci_cd</a>
+          </section>
+
+          <section>
+            <h2>Gitlab executors</h2>
+
+            <a href="https://docs.gitlab.com/runner/install/" target="_blank">https://docs.gitlab.com/runner/install</a>
+
+            <br /><br />
+
+            <ul>
+              <li>SSH</li>
+              <li>Shell</li>
+              <li>Parallels</li>
+              <li>VirtualBox</li>
+              <li>Docker</li>
+              <li>Docker Machine (auto-scaling)</li>
+              <li>Kubernetes</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Docker executor</h2>
+
+            /etc/gitlab-runner/config.toml
+
+            <pre style="font-size: 15px;">
+concurrent = 1
+check_interval = 0
+
+[[runners]]
+  name = "runner one"
+  url = "https://gitlab.com/"
+  token = "XXXXXXXXXXX"
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "ruby:2.4.0"
+    privileged = false
+    disable_cache = false
+    volumes = ["/cache","/var/run/docker.sock:/var/run/docker.sock"]
+    shm_size = 0
+  [runners.cache]
+    Type = "s3"
+    Shared = true
+    [runners.cache.s3]
+      ServerAddress = "s3.amazonaws.com"
+      AccessKey = "XXXXXXXXXXXXX"
+      SecretKey = "XXXXXXXXXXXXX"
+      BucketName = "XXXXXXXXXXXXX"
+      BucketLocation = "eu-west-3"
+      Insecure = false
+            </pre>
+
+            <a href="https://gitlab.com/3mundi/hellofcm/-/settings/ci_cd" target="_blank">https://gitlab.com/3mundi/hellofcm/-/settings/ci_cd</a>
+          </section>
+
+          <section>
+            <h2>Kubernetes executor</h2>
+
+            <img width="100%" src="img/gitlab_kubernetes.png" />
+          </section>
+
+          <section>
+            <h2>Docker machine executor</h2>
+
+            <img width="60%" src="img/gitlab_dockermachine.png" />
+          </section>
+
+          <section>
+            <h2>Docker machine executor</h2>
+
+            <pre style="font-size: 11px">
+concurrent = 3
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+
+[[runners]]
+  name = "runner-bastion"
+  url = "https://gitlab.com/"
+  token = "XXXXXXXXX"
+  executor = "docker+machine"
+  [runners.custom_build_dir]
+  [runners.docker]
+    tls_verify = false
+    image = "ruby:2.6"
+    privileged = false
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+    disable_cache = false
+    volumes = ["/cache","/var/run/docker.sock:/var/run/docker.sock"]
+    shm_size = 0
+  [runners.machine]
+    IdleCount = 0                    # The amount of idle machines we require for CI if build queue is empty
+    IdleTime = 600                   # Each machine can be idle for up to 600 seconds, then destroyed
+    MachineName = "gitlab-runner-autoscale-%s"    # Each machine will have a unique name ('%s' is required and generates a random number)
+    MachineDriver = "digitalocean"   # Docker Machine is using the 'digitalocean' driver
+    MachineOptions = [
+        "digitalocean-image=coreos-stable", # The DigitalOcean system image to use by default
+        "digitalocean-ssh-user=core", # The default SSH user
+        "digitalocean-access-token=XXXXXXXX", # Access token from Step 7
+        "digitalocean-region=ams2", # The data center to spawn runners in
+        "digitalocean-size=2gb", # The size (and price category) of your spawned runners
+        "digitalocean-private-networking" # Enable private networking on runners
+    ]
+  [runners.cache]
+    Type = "s3"
+    Shared = true
+    [runners.cache.s3]
+      ServerAddress = "s3.amazonaws.com"
+      AccessKey = "XXXXXXXXX"
+      SecretKey = "XXXXXXXXX"
+      BucketName = "XXXXXXXXX"
+      BucketLocation = "eu-west-3"
+      Insecure = false
+            </pre>
+          </section>
+        </section>
+
+        <section>
+            <h2>Questions?</h2>
+
+            <img src="img/final_slide.jpg"/>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
