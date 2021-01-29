@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Introduction to Terraform</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h2>Introduction to Terraform</h2>
+
+            <img src="img/terraform_logo.png" width="40%" style="border:none;" />
+
+            <p>Guillermo Guerrero</p>
+            <p>
+                <small>Follow me on github:<br />
+                    <a href="https://github.com/ryanfox1985" target="_blank">
+                      https://github.com/ryanfox1985
+                    </a>
+                </small>
+            </p>
+            <br />
+            <p>
+                <small>February 2nd, 2021</small>
+            </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>
+              <img src="img/terraform_logo.png" width="10%" style="border:none;" />
+            </h2>
+
+            <blockquote>
+              <p>Terraform is a tool for creating, changing, and versioning infrastructure safely and predictably</p>
+              <p>-- <cite>terraform.io</cite></p>
+            </blockquote>
+          </section>
+
+          <section>
+            <h2>
+              <img src="img/terraform.png" width="35%" style="border:none;" />
+            </h2>
+
+            <ul>
+              <li>Hashicorp</li>
+              <li>Open Source</li>
+              <li>Written in Go</li>
+              <li>CLI tool and precompiled binaries for Mac, Linux, Windows, FreeBSD, and OpenBSD</li>
+              <li>27k+ Commits, 25.3k+ Stars, 6.4k+ Forks</li>
+              <li>Providers (AWS, Google Cloud, Azure, Digital Ocean... +500 more)</li>
+            </ul>
+
+            <p>
+              <a href="https://www.terraform.io" target="_blank">https://www.terraform.io</a><br />
+              <a href="https://github.com/hashicorp/terraform" target="_blank">https://github.com/hashicorp/terraform</a>
+            </p>
+          </section>
+
+          <section>
+            <h2>HASHICORP</h2>
+
+            <img src="img/hashicorp_tools.jpg" width="70%" style="border:none;" />
+          </section>
+
+          <section>
+            <h2>WHY INFRASTRUCTURE AS CODE MATTERS?</h2>
+          </section>
+
+          <section>
+            <h3>You can deploy manually infrastructure...</h3>
+
+            <img src="img/digital_ocean.png" width="80%" style="border:none;" />
+          </section>
+
+          <section>
+            <img src="img/manual_meme.jpg" width="55%" style="border:none;" />
+          </section>
+
+          <section>
+            <h3>BENEFITS OF INFRASTRUCTURE AS CODE</h3>
+
+            <ul>
+              <li>Repeatability</li>
+              <li>Automation</li>
+              <li>Version Control</li>
+              <li>Code Review</li>
+              <li>Documentation</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>How's that work?</h2>
+
+            <li>`.tf` config file allows teams to describe their infrastructure in simple DSL</li>
+            <li>`terraform` CLI creates, changes, and destroys these resources accordingly</li>
+            <li>`.tfstate` current infrastructure state</li>
+          </section>
+
+          <section>
+            <h2>Basic CLI usage</h2>
+
+            <ul>
+              <li>`plan` to view the execution plan</li>
+              <li>`apply` to execute the plan</li>
+              <li>`import` to import resources to the current state</li>
+            </ul>
+
+            <p>(there are more; these are the basics)</p>
+          </section>
+
+          <section>
+            <h2>Life circle</h2>
+
+            <img src="img/tf_life_circle.png" width="50%" style="border:none;" />
+          </section>
+
+          <section>
+            <h2>.tf file</h2>
+
+            <img src="img/tf_file.png" width="80%" style="border:none;" />
+          </section>
+
+          <section>
+            <h2>Plan</h2>
+
+            <img src="img/tf_plan.png" width="50%" style="border:none;" />
+          </section>
+
+          <section>
+            <h2>Digital Ocean resources and examples</h2>
+
+            <a href="https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet" target="_blank">
+              Website
+            </a>
+          </section>
+        </section>
+
+        <section>
+          <h2>Roadmap</h2>
+
+          <ul>
+            <li>Import all the infrastructure</li>
+            <li>Improve organization `.tf` files</li>
+            <li>Start to manage OVH domains</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Thank you</h2>
+          <h3>Questions?</h3>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
